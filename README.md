@@ -37,7 +37,7 @@ docker-compose up -d
 
 ## Links for the local environment
 
-- https://wesbite-local.defihelper.io
+- https://website-local.defihelper.io
 - https://app-local.defihelper.io
 - https://backend-local.defihelper.io
 - https://scanner-local.defihelper.io

@@ -18,17 +18,51 @@ services:
       - dfh-prerenderer
     networks:
       defihelper:
+#        aliases:
+#          - defihelper.io
+#          - app.defihelper.io
+#          - backend.defihelper.io
+#          - scanner.defihelper.io
 
-  dfh-scan:
-    image: node:14-alpine
-    container_name: dfh-scan
+  dfh-backend:
+    image: node:12-alpine
+    container_name: dfh-backend
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
-      - ./src/blockchain-scan:/home/node/app
-      - ./config/blockchain-scan.env:/home/node/app/.env
+      - ./src/defihelper-backend:/home/node/app
+      - ./config/defihelper-backend.env:/home/node/app/.env
+      - ./config:/config
+    command: /bin/sh -c "npm ci && npm run build && npm run start"
+    networks:
+      defihelper:
+
+  dfh-scanner:
+    image: node:14-alpine
+    container_name: dfh-scanner
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-scanner:/home/node/app
+      - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
     command: /bin/sh -c "npm ci && npm run server-build && npm run website-build && npm run start"
+    networks:
+      defihelper:
+
+  dfh-redis:
+    image: redis:6.2.4-alpine
+    container_name: dfh-redis
+    restart: unless-stopped
+    networks:
+      defihelper:
+
+  dfh-redisadmin:
+    image: erikdubbelboer/phpredisadmin
+    container_name: dfh-redisadmin
+    restart: unless-stopped
+    environment:
+      REDIS_1_HOST: dfh-redis
     networks:
       defihelper:
 
@@ -43,12 +77,13 @@ services:
       PGDATA: /data/postgres
     volumes:
       - ./data/postgres:/data/postgres
+      - ./pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       defihelper:
 
   dfh-pgadmin:
     image: dpage/pgadmin4:latest
-    container_name: sharapp-pgadmin
+    container_name: dfh-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@defihelper.io
       PGADMIN_DEFAULT_PASSWORD: dev
@@ -67,6 +102,17 @@ services:
       - CACHE_TTL=6000
     networks:
       defihelper:
+
+#  dfh-mainnet:
+#    image: ethereum/client-go
+#    container_name: dfh-mainnet
+#    restart: unless-stopped
+#    command: --datadir=/root/.ethereum --syncmode full --gcmode archive --cache 16384 --http --http.api "eth,net,web3" --http.corsdomain '*' --http.vhosts '*' --http.addr 0.0.0.0 --http.port 8545 --ws --ws.addr 0.0.0.0
+#    volumes:
+#      - /data:/data
+#      - ./data/mainnet:/root/.ethereum
+#    networks:
+#      bondappetit:
 
 volumes:
   node_modules:

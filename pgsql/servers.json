@@ -1,7 +1,7 @@
 {
     "Servers": {
         "1": {
-            "Name": "postgres",
+            "Name": "admin@defihelper.io",
             "Group":"Servers",
             "Port": 5432,
             "Username": "development",

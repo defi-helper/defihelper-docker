@@ -18,11 +18,8 @@ services:
       - dfh-prerenderer
     networks:
       defihelper:
-#        aliases:
-#          - defihelper.io
-#          - app.defihelper.io
-#          - backend.defihelper.io
-#          - scanner.defihelper.io
+        aliases:
+          - backend-local.defihelper.io
 
   dfh-backend:
     image: node:12-alpine

@@ -27,6 +27,7 @@ git clone git@github.com:defi-helper/defihelper-scanner.git src/defihelper-scann
 git clone git@github.com:defi-helper/defihelper-backend.git src/defihelper-backend
 git clone git@github.com:defi-helper/defihelper-app.git src/defihelper-app
 git clone git@github.com:defi-helper/defihelper-website.git src/defihelper-website
+git clone git@github.com:defi-helper/defihelper-adapters.git src/defihelper-adapters
 ```
 
 4. Run docker containers

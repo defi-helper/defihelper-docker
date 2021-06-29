@@ -50,6 +50,28 @@ services:
     networks:
       defihelper:
 
+  dfh-app:
+    image: node:14-alpine
+    container_name: dfh-app
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-app:/home/node/app
+    command: /bin/sh -c "npm ci && npm run start"
+    networks:
+      defihelper:
+
+  dfh-adapters:
+    image: node:14-alpine
+    container_name: dfh-adapters
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-adapters:/home/node/app
+    command: /bin/sh -c "npm ci && npm run watch"
+    networks:
+      defihelper:
+
   dfh-redis:
     image: redis:6.2.4-alpine
     container_name: dfh-redis
@@ -107,7 +129,7 @@ services:
 #    image: ethereum/client-go
 #    container_name: dfh-mainnet
 #    restart: unless-stopped
-#    command: --datadir=/root/.ethereum --syncmode full --gcmode archive --cache 16384 --http --http.api "eth,net,web3" --http.corsdomain '*' --http.vhosts '*' --http.addr 0.0.0.0 --http.port 8545 --ws --ws.addr 0.0.0.0
+#    command: --datadir=/root/.ethereum --syncmode full --gcmode archive --cache 73728 --http --http.api "eth,net,web3" --http.corsdomain '*' --http.vhosts '*' --http.addr 0.0.0.0 --http.port 8545 --ws --ws.addr 0.0.0.0
 #    volumes:
 #      - /data:/data
 #      - ./data/mainnet:/root/.ethereum

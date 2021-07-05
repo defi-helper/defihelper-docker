@@ -22,7 +22,7 @@ services:
           - backend-local.defihelper.io
 
   dfh-backend:
-    image: node:12-alpine
+    image: node:14-alpine
     container_name: dfh-backend
     working_dir: /home/node/app
     restart: unless-stopped

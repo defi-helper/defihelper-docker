@@ -53,6 +53,7 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-app:/home/node/app
+      - ./config/defihelper-app.env:/home/node/app/.env
     command: /bin/sh -c "npm ci && npm run build"
     networks:
       defihelper:

@@ -22,7 +22,7 @@ services:
           - backend-local.defihelper.io
 
   dfh-backend:
-    image: node:14-alpine
+    image: node:16-alpine
     container_name: dfh-backend
     working_dir: /home/node/app
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
       defihelper:
 
   dfh-scanner:
-    image: node:14-alpine
+    image: node:16-alpine
     container_name: dfh-scanner
     working_dir: /home/node/app
     restart: unless-stopped
@@ -48,7 +48,7 @@ services:
       defihelper:
 
   dfh-app:
-    image: node:14-alpine
+    image: node:16-alpine
     container_name: dfh-app
     working_dir: /home/node/app
     restart: unless-stopped
@@ -59,7 +59,7 @@ services:
       defihelper:
 
   dfh-adapters:
-    image: node:14-alpine
+    image: node:16-alpine
     container_name: dfh-adapters
     working_dir: /home/node/app
     restart: unless-stopped

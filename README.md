@@ -56,3 +56,7 @@ docker-compose up -d
     * `docker images prune`
     * `docker volume prune`
     * go to step 1
+
+### To update all images
+
+`docker images | grep -v REPOSITORY | awk '{print $1}' | xargs -L1 docker pull`

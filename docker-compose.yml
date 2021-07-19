@@ -65,7 +65,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./src/defihelper-adapters:/home/node/app
-    command: /bin/sh -c "npm ci && npm run watch"
+    command: /bin/sh -c "npm ci && npm run build"
     networks:
       defihelper:
 

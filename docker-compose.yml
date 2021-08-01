@@ -47,6 +47,17 @@ services:
     networks:
       defihelper:
 
+  dfh-website:
+    image: node:16-alpine
+    container_name: dfh-app
+    working_dir: /home/node/app
+    volumes:
+      - ./src/defihelper-website:/home/node/app
+      - ./config/defihelper-website.env:/home/node/app/.env
+    command: /bin/sh -c "npm ci && npm run build"
+    networks:
+      defihelper:
+
   dfh-app:
     image: node:16-alpine
     container_name: dfh-app

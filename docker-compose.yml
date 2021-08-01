@@ -47,9 +47,9 @@ services:
     networks:
       defihelper:
 
-  dfh-website:
+  dfh-build-website:
     image: node:16-alpine
-    container_name: dfh-website
+    container_name: dfh-build-website
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-website:/home/node/app
@@ -58,9 +58,9 @@ services:
     networks:
       defihelper:
 
-  dfh-app:
+  dfh-build-app:
     image: node:16-alpine
-    container_name: dfh-app
+    container_name: dfh-build-app
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-app:/home/node/app
@@ -69,9 +69,9 @@ services:
     networks:
       defihelper:
 
-  dfh-adapters:
+  dfh-build-adapters:
     image: node:16-alpine
-    container_name: dfh-adapters
+    container_name: dfh-build-adapters
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-adapters:/home/node/app

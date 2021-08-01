@@ -49,7 +49,7 @@ services:
 
   dfh-website:
     image: node:16-alpine
-    container_name: dfh-app
+    container_name: dfh-website
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-website:/home/node/app

@@ -19,7 +19,7 @@ services:
     networks:
       defihelper:
         aliases:
-          - api.coingecko.com
+          - coingecko.defihelper.io
           - backend-local.defihelper.io
           - scanner-local.defihelper.io
 

@@ -20,6 +20,7 @@ services:
       defihelper:
         aliases:
           - backend-local.defihelper.io
+          - scanner-local.defihelper.io
 
   dfh-backend:
     image: node:16-alpine
@@ -31,6 +32,21 @@ services:
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
     command: /bin/sh -c "npm ci && npm run build && npm run start"
+    networks:
+      defihelper:
+
+  dfh-backend-queue:
+    image: node:16-alpine
+    container_name: dfh-backend-queue
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-backend:/home/node/app
+      - ./config/defihelper-backend.env:/home/node/app/.env
+      - ./config:/config
+    command: /bin/sh -c "npm run queue"
+    depends_on:
+      - dfh-backend
     networks:
       defihelper:
 

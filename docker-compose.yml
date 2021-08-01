@@ -73,7 +73,6 @@ services:
     image: node:16-alpine
     container_name: dfh-adapters
     working_dir: /home/node/app
-    restart: unless-stopped
     volumes:
       - ./src/defihelper-adapters:/home/node/app
     command: /bin/sh -c "npm ci && npm run build"

@@ -71,7 +71,7 @@ services:
     volumes:
       - ./src/defihelper-website:/home/node/app
       - ./config/defihelper-website.env:/home/node/app/.env
-    command: /bin/sh -c "apk add git && npm ci && npm run typechain && npm run build"
+    command: /bin/sh -c "apk add git && npm ci && npm run build"
     networks:
       defihelper:
 

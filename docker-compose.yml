@@ -98,7 +98,7 @@ services:
 
   dfh-adapters:
     image: node:16-alpine
-    container_name: dfh-build-adapters
+    container_name: dfh-adapters
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-adapters:/home/node/app

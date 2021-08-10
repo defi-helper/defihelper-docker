@@ -102,7 +102,7 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./src/defihelper-adapters:/home/node/app
-    command: /bin/sh -c "npm ci && npm run build:client && npm run server"
+    command: /bin/sh -c "apk add python3 && npm ci && npm run build:client && npm run server"
     networks:
       defihelper:
 

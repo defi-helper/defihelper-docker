@@ -36,9 +36,9 @@ services:
     networks:
       defihelper:
 
+ # docker-compose up -d --scale dfh-backend-queue=5 dfh-backend-queue
   dfh-backend-queue:
     image: node:16-alpine
-    container_name: dfh-backend-queue
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:

@@ -96,6 +96,16 @@ services:
     networks:
       defihelper:
 
+  dfh-adapters:
+    image: node:16-alpine
+    container_name: dfh-build-adapters
+    working_dir: /home/node/app
+    volumes:
+      - ./src/defihelper-adapters:/home/node/app
+    command: /bin/sh -c "npm ci && npm run build:client && npm run server"
+    networks:
+      defihelper:
+
   dfh-redis:
     image: redis:6.2.4-alpine
     container_name: dfh-redis

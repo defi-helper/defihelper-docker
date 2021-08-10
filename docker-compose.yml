@@ -19,6 +19,8 @@ services:
     networks:
       defihelper:
         aliases:
+          - scanner.defihelper.io
+          - backend.defihelper.io
           - coingecko.defihelper.io
           - backend-local.defihelper.io
           - scanner-local.defihelper.io

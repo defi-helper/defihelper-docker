@@ -103,10 +103,6 @@ services:
     command: /bin/sh -c "npm ci && npm run build"
     networks:
       defihelper:
-    deploy:
-      resources:
-        limits:
-          memory: 6144M
 
   dfh-build-adapters:
     image: node:16-alpine

@@ -82,6 +82,17 @@ services:
     networks:
       defihelper:
 
+  dfh-adapters:
+    image: node:16-alpine
+    container_name: dfh-adapters
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-adapters:/home/node/app
+    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run build:adapters && npm run build:client && npm run server"
+    networks:
+      defihelper:
+
   dfh-build-website:
     image: node:16-alpine
     container_name: dfh-build-website
@@ -101,26 +112,6 @@ services:
       - ./src/defihelper-app:/home/node/app
       - ./config/defihelper-app.env:/home/node/app/.env
     command: /bin/sh -c "npm ci && npm run build"
-    networks:
-      defihelper:
-
-  dfh-build-adapters:
-    image: node:16-alpine
-    container_name: dfh-build-adapters
-    working_dir: /home/node/app
-    volumes:
-      - ./src/defihelper-adapters:/home/node/app
-    command: /bin/sh -c "npm ci && npm run build"
-    networks:
-      defihelper:
-
-  dfh-adapters:
-    image: node:16-alpine
-    container_name: dfh-adapters
-    working_dir: /home/node/app
-    volumes:
-      - ./src/defihelper-adapters:/home/node/app
-    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run build:adapters && npm run build:client && npm run server"
     networks:
       defihelper:
 

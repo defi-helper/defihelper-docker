@@ -93,6 +93,17 @@ services:
     networks:
       defihelper:
 
+  dfh-staking-oracle:
+    image: node:16-alpine
+    container_name: dfh-staking-oracle
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-staking-oracle:/home/node/app
+    command: /bin/sh -c "npm ci && npm run server -- --port 9003"
+    networks:
+      defihelper:
+
   dfh-build-website:
     image: node:16-alpine
     container_name: dfh-build-website

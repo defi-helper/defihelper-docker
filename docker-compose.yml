@@ -25,6 +25,7 @@ services:
           - coingecko.defihelper.io
           - backend-local.defihelper.io
           - scanner-local.defihelper.io
+          - staking-oracle.defihelper.io
 
   dfh-backend:
     image: node:16-alpine

@@ -83,6 +83,19 @@ services:
     networks:
       defihelper:
 
+  dfh-scanner-queue:
+    image: node:16-alpine
+    container_name: dfh-scanner-queue
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-scanner:/home/node/app
+      - ./config/defihelper-scanner.env:/home/node/app/.env
+      - ./config:/config
+    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue"
+    networks:
+      defihelper:
+
   dfh-adapters:
     image: node:16-alpine
     container_name: dfh-adapters

@@ -28,6 +28,7 @@ git clone git@github.com:defi-helper/defihelper-backend.git src/defihelper-backe
 git clone git@github.com:defi-helper/defihelper-app.git src/defihelper-app
 git clone git@github.com:defi-helper/defihelper-website.git src/defihelper-website
 git clone git@github.com:defi-helper/defihelper-adapters.git src/defihelper-adapters
+git clone git@github.com:defi-helper/defihelper-stats.git src/defihelper-stats
 ```
 
 4. Run docker containers
@@ -42,6 +43,7 @@ docker-compose up -d
 - https://app-local.defihelper.io
 - https://backend-local.defihelper.io
 - https://scanner-local.defihelper.io
+- https://stats-local.defihelper.io
 
 ## Dev tools for the local environment
 

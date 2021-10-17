@@ -133,6 +133,18 @@ services:
     networks:
       defihelper:
 
+  dfh-stats:
+    image: node:16-alpine
+    container_name: dfh-stats
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - ./src/defihelper-stats:/home/node/app
+      - ./config/defihelper-stats.env:/home/node/app/.env
+    command: /bin/sh -c "npm ci && npm run build && npm run start"
+    networks:
+      defihelper:
+
   dfh-build-website:
     image: node:16-alpine
     container_name: dfh-build-website

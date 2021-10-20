@@ -118,7 +118,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./src/defihelper-adapters:/home/node/app
-    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run adapters:build && npm run client:build && npm run automates:build && npm run server"
+    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run server"
     networks:
       defihelper:
 

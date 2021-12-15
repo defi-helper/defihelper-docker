@@ -37,6 +37,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
@@ -52,6 +53,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
@@ -69,6 +71,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
@@ -86,6 +89,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
@@ -103,6 +107,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
@@ -118,6 +123,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
@@ -133,6 +139,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-adapters:/home/node/app
     command: /bin/sh -c "apk add python3 build-base && npm ci && npm run adapters:build && npm run client:build && npm run server"
     environment:
@@ -146,6 +153,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-staking-oracle:/home/node/app
     command: /bin/sh -c "npm ci && npm run server -- --port 9003"
     environment:
@@ -159,6 +167,7 @@ services:
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-stats:/home/node/app
       - ./config/defihelper-stats.env:/home/node/app/.env
     command: /bin/sh -c "npm ci && npm run build && npm run start"
@@ -172,6 +181,7 @@ services:
     container_name: dfh-build-website
     working_dir: /home/node/app
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-website:/home/node/app
       - ./config/defihelper-website.env:/home/node/app/.env
     command: /bin/sh -c "apk add git && npm ci && npm run build"
@@ -185,6 +195,7 @@ services:
     container_name: dfh-build-app
     working_dir: /home/node/app
     volumes:
+      - node_modules:/root/.npm
       - ./src/defihelper-app:/home/node/app
       - ./config/defihelper-app.env:/home/node/app/.env
     command: /bin/sh -c "npm ci && npm run build"

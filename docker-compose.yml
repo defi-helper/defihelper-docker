@@ -260,6 +260,15 @@ services:
     networks:
       defihelper:
 
+  dfh-rabbitmq:
+    image: rabbitmq:management-alpine
+    container_name: rabbitmq
+    volumes:
+      - ./config/rabbitmq/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez:/opt/rabbitmq/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez
+      - ./config/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins
+    networks:
+      defihelper:
+
 volumes:
   node_modules:
 

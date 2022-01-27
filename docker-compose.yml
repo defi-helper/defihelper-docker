@@ -41,7 +41,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /bin/sh -c "npm ci && npm run build && npm run start"
+    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run build && npm run start"
     environment:
       NODE_ENV: development
     networks:

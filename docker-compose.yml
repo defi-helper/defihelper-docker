@@ -110,7 +110,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-deferred -- -i 10 -l 10"
+    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-deferred -- -i 5 -l 1000"
     environment:
       NODE_ENV: development
     depends_on:

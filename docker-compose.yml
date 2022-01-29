@@ -280,6 +280,7 @@ services:
   dfh-rabbitmq:
     image: rabbitmq:management-alpine
     container_name: dfh-rabbitmq
+    restart: unless-stopped
     volumes:
       - ./config/rabbitmq/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez:/opt/rabbitmq/plugins/rabbitmq_delayed_message_exchange-3.8.0.ez
       - ./config/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins

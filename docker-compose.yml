@@ -159,7 +159,7 @@ services:
       - node_modules:/root/.npm
       - ./src/defihelper-adapters:/home/node/app
       - ./config/defihelper-adapters.env:/home/node/app/.env
-    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run adapters:build && npm run client:build && npm run server"
+    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run adapters:build && npm run adapters-ts:build && npm run client:build && npm run server"
     environment:
       NODE_ENV: production
     networks:

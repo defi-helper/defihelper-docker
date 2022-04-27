@@ -173,7 +173,7 @@ services:
     volumes:
       - node_modules:/root/.npm
       - ./src/defihelper-staking-oracle:/home/node/app
-    command: /bin/sh -c "npm ci && npm run server -- --port 9003"
+    command: /bin/sh -c "npm ci && npm run server"
     environment:
       NODE_ENV: production
     networks:

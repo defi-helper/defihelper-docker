@@ -144,7 +144,23 @@ services:
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue"
+    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue -- --exclude=fillInteraction"
+    environment:
+      NODE_ENV: production
+    networks:
+      defihelper:
+
+  # docker-compose up -d --scale dfh-scanner-queue=5 dfh-scanner-queue
+  dfh-scanner-migration:
+    image: node:16-alpine
+    working_dir: /home/node/app
+    restart: unless-stopped
+    volumes:
+      - node_modules:/root/.npm
+      - ./src/defihelper-scanner:/home/node/app
+      - ./config/defihelper-scanner.env:/home/node/app/.env
+      - ./config:/config
+    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue -- --include=fillInteraction"
     environment:
       NODE_ENV: production
     networks:

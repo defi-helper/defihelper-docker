@@ -57,7 +57,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_default"
+    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_default"
     environment:
       NODE_ENV: production
     depends_on:
@@ -75,7 +75,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricCurrent"
+    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricCurrent"
     environment:
       NODE_ENV: production
     depends_on:
@@ -93,7 +93,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricHistory"
+    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricHistory"
     environment:
       NODE_ENV: production
     depends_on:
@@ -110,7 +110,7 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-backend:9000 -t 120 -- /bin/sh -c "npm run queue-deferred -- -i 5 -l 1000"
+    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-deferred -- -i 5 -l 1000"
     environment:
       NODE_ENV: production
     depends_on:
@@ -144,7 +144,7 @@ services:
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue -- --exclude=fillInteraction"
+    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue -- --exclude=fillInteraction"
     environment:
       NODE_ENV: production
     networks:
@@ -160,7 +160,7 @@ services:
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:9002 -t 120 -- /bin/sh -c "npm run queue -- --include=fillInteraction"
+    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue -- --include=fillInteraction"
     environment:
       NODE_ENV: production
     networks:

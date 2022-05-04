@@ -219,7 +219,7 @@ services:
       - node_modules:/root/.npm
       - ./src/defihelper-website:/home/node/app
       - ./config/defihelper-website.env:/home/node/app/.env
-    command: /bin/sh -c "apk add git && npm ci && npm run build"
+    command: /bin/sh -c "apk add python3 build-base git && npm ci && npm run build"
     environment:
       NODE_ENV: production
     networks:

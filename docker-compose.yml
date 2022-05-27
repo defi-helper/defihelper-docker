@@ -141,7 +141,7 @@ services:
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue-consume"
+    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q scanner_tasks_default"
     environment:
       NODE_ENV: production
     networks:

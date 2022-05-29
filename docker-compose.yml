@@ -20,13 +20,10 @@ services:
     networks:
       defihelper:
         aliases:
-          - scanner.defihelper.io
-          - backend.defihelper.io
-          - coingecko.defihelper.io
-          - adapters-local.defihelper.io
-          - backend-local.defihelper.io
-          - scanner-local.defihelper.io
-          - stats-local.defihelper.io
+          - adapters-local.defihelper.info
+          - backend-local.defihelper.info
+          - scanner-local.defihelper.info
+          - stats-local.defihelper.info
 
   dfh-backend:
     image: node:16-alpine
@@ -273,7 +270,7 @@ services:
     image: dpage/pgadmin4:6.1
     container_name: dfh-pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@defihelper.io
+      PGADMIN_DEFAULT_EMAIL: admin@defihelper.info
       PGADMIN_DEFAULT_PASSWORD: dev
     volumes:
       - ./pgsql/servers.json:/pgadmin4/servers.json

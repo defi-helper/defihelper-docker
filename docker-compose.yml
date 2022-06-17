@@ -23,6 +23,7 @@ services:
           - adapters-local.defihelper.info
           - backend-local.defihelper.info
           - scanner-local.defihelper.info
+          - watcher-local.defihelper.info
           - stats-local.defihelper.info
 
   dfh-backend:
@@ -35,80 +36,9 @@ services:
       - ./src/defihelper-backend:/home/node/app
       - ./config/defihelper-backend.env:/home/node/app/.env
       - ./config:/config
-    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run build && npm run start"
+    command: /bin/sh -c "apk add python3 build-base && npm run build && npm run start"
     environment:
       NODE_ENV: production
-    networks:
-      defihelper:
-
- # docker-compose up -d --scale dfh-backend-queue=5 dfh-backend-queue
-  dfh-backend-queue:
-    image: node:16-alpine
-    working_dir: /home/node/app
-    restart: unless-stopped
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-backend:/home/node/app
-      - ./config/defihelper-backend.env:/home/node/app/.env
-      - ./config:/config
-    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_default"
-    environment:
-      NODE_ENV: production
-    depends_on:
-      - dfh-backend
-    networks:
-      defihelper:
-
-  # docker-compose up -d --scale dfh-backend-queue=5 dfh-backend-queue
-  dfh-backend-metrics:
-    image: node:16-alpine
-    working_dir: /home/node/app
-    restart: unless-stopped
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-backend:/home/node/app
-      - ./config/defihelper-backend.env:/home/node/app/.env
-      - ./config:/config
-    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricCurrent"
-    environment:
-      NODE_ENV: production
-    depends_on:
-      - dfh-backend
-    networks:
-      defihelper:
-
-  # docker-compose up -d --scale dfh-backend-queue=5 dfh-backend-queue
-  dfh-backend-metrics-history:
-    image: node:16-alpine
-    working_dir: /home/node/app
-    restart: unless-stopped
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-backend:/home/node/app
-      - ./config/defihelper-backend.env:/home/node/app/.env
-      - ./config:/config
-    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q tasks_metricHistory"
-    environment:
-      NODE_ENV: production
-    depends_on:
-      - dfh-backend
-    networks:
-      defihelper:
-
-  dfh-backend-queue-deferred:
-    image: node:16-alpine
-    working_dir: /home/node/app
-    restart: unless-stopped
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-backend:/home/node/app
-      - ./config/defihelper-backend.env:/home/node/app/.env
-      - ./config:/config
-    command: /config/wait-for.sh dfh-backend:8080 -t 120 -- /bin/sh -c "npm run queue-deferred -- -l 1000"
-    environment:
-      NODE_ENV: production
-    depends_on:
-      - dfh-backend
     networks:
       defihelper:
 
@@ -122,39 +52,23 @@ services:
       - ./src/defihelper-scanner:/home/node/app
       - ./config/defihelper-scanner.env:/home/node/app/.env
       - ./config:/config
-    command: /bin/sh -c "npm ci && npm run server-build && npm run website-build && npm run start"
+    command: /bin/sh -c "npm run server-build && npm run website-build && npm run start"
     environment:
       NODE_ENV: production
     networks:
       defihelper:
 
-  # docker-compose up -d --scale dfh-scanner-queue=5 dfh-scanner-queue
-  dfh-scanner-queue:
+  dfh-watcher:
     image: node:16-alpine
+    container_name: dfh-watcher
     working_dir: /home/node/app
     restart: unless-stopped
     volumes:
       - node_modules:/root/.npm
-      - ./src/defihelper-scanner:/home/node/app
-      - ./config/defihelper-scanner.env:/home/node/app/.env
+      - ./src/defihelper-watcher:/home/node/app
+      - ./config/defihelper-watcher.env:/home/node/app/.env
       - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue-consume -- -q scanner_tasks_default"
-    environment:
-      NODE_ENV: production
-    networks:
-      defihelper:
-
-  # docker-compose up -d --scale dfh-scanner-queue-deferred=1 dfh-scanner-queue-deferred
-  dfh-scanner-queue-deferred:
-    image: node:16-alpine
-    working_dir: /home/node/app
-    restart: unless-stopped
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-scanner:/home/node/app
-      - ./config/defihelper-scanner.env:/home/node/app/.env
-      - ./config:/config
-    command: /config/wait-for.sh dfh-scanner:8080 -t 120 -- /bin/sh -c "npm run queue-deferred -- -l 1000"
+    command: /bin/sh -c "npm run server:build && npm run client:build && npm run start"
     environment:
       NODE_ENV: production
     networks:
@@ -170,7 +84,7 @@ services:
       - ./src/defihelper-adapters:/home/node/app
       - ./config/defihelper-adapters.env:/home/node/app/.env
       - ./config:/config
-    command: /bin/sh -c "apk add python3 build-base && npm ci && npm run adapters:build && npm run adapters-ts:build && npm run client:build && npm run server"
+    command: /bin/sh -c "apk add python3 build-base && npm run adapters:build && npm run adapters-ts:build && npm run client:build && npm run server"
     environment:
       NODE_ENV: production
     networks:
@@ -184,7 +98,7 @@ services:
     volumes:
       - node_modules:/root/.npm
       - ./src/defihelper-staking-oracle:/home/node/app
-    command: /bin/sh -c "npm ci && npm run server"
+    command: /bin/sh -c "npm run server"
     environment:
       NODE_ENV: production
     networks:
@@ -199,7 +113,7 @@ services:
       - node_modules:/root/.npm
       - ./src/defihelper-stats:/home/node/app
       - ./config/defihelper-stats.env:/home/node/app/.env
-    command: /bin/sh -c "npm ci && npm run build && npm run start"
+    command: /bin/sh -c "npm run build && npm run start"
     environment:
       NODE_ENV: production
     networks:
@@ -213,7 +127,7 @@ services:
       - node_modules:/root/.npm
       - ./src/defihelper-website:/home/node/app
       - ./config/defihelper-website.env:/home/node/app/.env
-    command: /bin/sh -c "apk add python3 build-base git && npm ci && npm run build"
+    command: /bin/sh -c "apk add python3 build-base git && npm run build"
     environment:
       NODE_ENV: production
     networks:
@@ -227,7 +141,7 @@ services:
       - node_modules:/root/.npm
       - ./src/defihelper-app:/home/node/app
       - ./config/defihelper-app.env:/home/node/app/.env
-    command: /bin/sh -c "npm ci && npm run build"
+    command: /bin/sh -c "npm run build"
     environment:
       NODE_ENV: production
     networks:

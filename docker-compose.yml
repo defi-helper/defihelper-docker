@@ -110,34 +110,6 @@ services:
     networks:
       defihelper:
 
-  dfh-build-website:
-    image: node:16-alpine
-    container_name: dfh-build-website
-    working_dir: /home/node/app
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-website:/home/node/app
-      - ./config/defihelper-website.env:/home/node/app/.env
-    command: /bin/sh -c "apk add python3 build-base git && npm run build"
-    environment:
-      NODE_ENV: production
-    networks:
-      defihelper:
-
-  dfh-build-app:
-    image: node:16-alpine
-    container_name: dfh-build-app
-    working_dir: /home/node/app
-    volumes:
-      - node_modules:/root/.npm
-      - ./src/defihelper-app:/home/node/app
-      - ./config/defihelper-app.env:/home/node/app/.env
-    command: /bin/sh -c "npm run build"
-    environment:
-      NODE_ENV: production
-    networks:
-      defihelper:
-
   dfh-redis:
     image: redis:6.2.4-alpine
     container_name: dfh-redis

@@ -120,7 +120,8 @@ services:
 #    ports:
 #      - 5432:5432
     volumes:
-      - postgres:/data/postgres
+      - ./pgsql:/db.backup
+      - dfh-postgres:/data/postgres
       - ./pgsql/init.sh:/docker-entrypoint-initdb.d/init.sh
     networks:
       defihelper:
@@ -174,7 +175,7 @@ services:
 
 volumes:
   node_modules:
-  postgres:
+  dfh-postgres:
 
 networks:
   defihelper:

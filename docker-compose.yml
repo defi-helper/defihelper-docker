@@ -132,8 +132,8 @@ services:
       POSTGRES_PASSWORD: dev
       POSTGRES_DB: development
       PGDATA: /data/postgres
-#    ports:
-#      - 5432:5432
+    ports:
+      - 5432:5432
     volumes:
       - ./pgsql:/db.backup
       - dfh-postgres:/data/postgres

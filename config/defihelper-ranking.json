@@ -1,6 +1,6 @@
 {
 	"postgres": {
-		"dbname": "ranking",
+		"dbname": "defihelper_ranking",
 		"dbuser": "development",
 		"password": "dev",
 		"host": "dfh-postgres",

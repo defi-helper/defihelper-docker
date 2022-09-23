@@ -45,7 +45,7 @@ services:
     volumes:
       - node_modules:/root/.npm
       - ./src/defihelper-watcher:/home/node/app
-      - ./config/defihelper-watcher.env:/home/node/app/.env
+      - ./config/defihelper-watcher.env:/home/node/app/configuration/.env
       - ./config:/config
     command: /bin/sh -c "npm run start"
     environment:
